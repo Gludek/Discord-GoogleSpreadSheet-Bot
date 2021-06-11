@@ -1,23 +1,24 @@
 {
   "name": "bot",
   "version": "0.1.0",
-  "description": "Discord-SPreadsheets-Bot",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Gludek/Discord-GSpreadSheet-Bot.git"
+    "url": "git+https://github.com/Gludek/Discord-GoogleSpreadSheet-Bot.git"
   },
-  "keywords": [
-    "Discord",
-    "Bot"
-  ],
   "author": "Gludek#7432",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Gludek/Discord-GSpreadSheet-Bot/issues"
+    "url": "https://github.com/Gludek/Discord-GoogleSpreadSheet-Bot/issues"
   },
-  "homepage": "https://github.com/Gludek/Discord-GSpreadSheet-Bot#readme"
+  "homepage": "https://github.com/Gludek/Discord-GoogleSpreadSheet-Bot#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "fs": "^0.0.1-security",
+    "googleapis": "^76.0.0"
+  }
 }
