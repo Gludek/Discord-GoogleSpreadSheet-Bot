@@ -1,0 +1,23 @@
+{
+  "name": "bot",
+  "version": "0.1.0",
+  "description": "Discord-SPreadsheets-Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gludek/Discord-GSpreadSheet-Bot.git"
+  },
+  "keywords": [
+    "Discord",
+    "Bot"
+  ],
+  "author": "Gludek#7432",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gludek/Discord-GSpreadSheet-Bot/issues"
+  },
+  "homepage": "https://github.com/Gludek/Discord-GSpreadSheet-Bot#readme"
+}
