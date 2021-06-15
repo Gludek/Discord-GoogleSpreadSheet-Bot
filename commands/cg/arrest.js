@@ -1,9 +1,9 @@
 const { x } = require('../../google');
-const config = require('../../config.json');
+const config = require('../../bot-config.json');
 const Discord = require('discord.js');
 const oddzialy = config.oddzialy;
 module.exports = {
-	name: 'arest',
+	name: 'arrest',
 	alias: ['a', 'areszt'],
 	description: 'Ping!',
 	args: true,

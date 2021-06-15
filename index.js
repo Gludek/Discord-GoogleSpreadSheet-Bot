@@ -1,11 +1,12 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
+const bot_config = require('./bot-config.json');
 const fs = require('fs');
 
 
 // Setup
 const client = new Discord.Client();
-const prefix = config.prefix;
+const prefix = bot_config.prefix;
 const channelID = '477172511424118804';
 client.login(config.BOT_TOKEN);
 client.on('ready', () => {
@@ -30,7 +31,7 @@ for (const folder of commandFolders) {
 console.log(client.commands);
 
 client.on('message', message => {
-	const channelIDs = config.Channel_IDS;
+	const channelIDs = bot_config.Channel_IDS;
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 	if (!channelIDs.includes(message.channel.id)) return;
 
