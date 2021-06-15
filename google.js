@@ -18,6 +18,7 @@
 const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
+const config = require('bot-config.json');
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
@@ -104,8 +105,8 @@ function InputData(auth, dane) {
 			dane.oddzial],
 	];
 	sheets.spreadsheets.values.append({
-		spreadsheetId: '1BCACAT_QhbpqmGimiQqjFhevhj3hTgxGL-Tdnt8cdPM',
-		range: 'Areszty!A2:E',
+		spreadsheetId: config.spreadsheetId,
+		range: config.range,
 		valueInputOption: 'RAW',
 		insertDataOption: 'INSERT_ROWS',
 		resource: { values,
@@ -125,5 +126,4 @@ function InputData(auth, dane) {
 module.exports = {
 	SCOPES,
 	x,
-	InputData,
 };

@@ -1,5 +1,17 @@
 {
-    "Channel_IDS":["477172511424118804"],
-    "prefix":"!",
-    "oddzialy": ["cg", "1st", "327th", "41st", "212th", "ws", "flota"]
+    "Channel_IDS": [
+        "477172511424118804"
+    ],
+    "prefix": "!",
+    "oddzialy": [
+        "cg",
+        "1st",
+        "327th",
+        "41st",
+        "212th",
+        "ws",
+        "flota"
+    ],
+    "spreadsheetId": "1BCACAT_QhbpqmGimiQqjFhevhj3hTgxGL-Tdnt8cdPM",
+    "range": "Areszty!A2:E"
 }
