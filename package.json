@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "eslint": "^7.28.0",
+    "googleapis": "^76.0.0",
+    "winston": "^3.3.3"
+  }
+}

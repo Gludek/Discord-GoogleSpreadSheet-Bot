@@ -112,6 +112,7 @@ dist
 
 *.json
 !bot-config.json
+!package.json
 # yarn v2
 .yarn/cache
 .yarn/unplugged

@@ -2,21 +2,47 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const bot_config = require('./bot-config.json');
 const fs = require('fs');
+const winston = require('winston');
 
+const logger = winston.createLogger({
+	transports: [
+		new winston.transports.Console(),
+		new winston.transports.File({ filename: 'log' }),
+	],
+	format: winston.format.printf(log => `[${log.level.toUpperCase()}] - ${log.message}`),
+});
 
 // Setup
 const client = new Discord.Client();
 const prefix = bot_config.prefix;
-const channelID = '477172511424118804';
+// const channelID = '477172511424118804';
+const rangi = [];
+let rangiT = [];
 client.login(config.BOT_TOKEN);
 client.on('ready', () => {
-	console.log('I am ready!');
-	client.channels.fetch(channelID)
-		.then(channel => {
-			channel.send('test');
-		})
-		.catch(console.error);
+	logger.log('info', 'The bot is online!');
+	client.guilds.cache.map(guild => {
+		guild.roles.cache.map(role => {
+			rangi.push(role.id);
+		});
+	});
+	rangi.push(rangi.shift());
+	let i = 0;
+	for (i = 0; i < rangi.length; i++) {
+		rangi[i] = [rangi[i], i];
+	}
+	rangiT = (rangi.reverse().map(obj => {
+		const rObj = {};
+		rObj[obj[0]] = obj[1];
+		return rObj;
+	}));
 });
+client.on('debug', m => logger.log('debug', m));
+client.on('warn', m => logger.log('warn', m));
+client.on('error', m => logger.log('error', m));
+
+process.on('uncaughtException', error => logger.log('error', error));
+
 
 client.commands = new Discord.Collection();
 const commandFolders = fs.readdirSync('./commands');
@@ -28,30 +54,42 @@ for (const folder of commandFolders) {
 		client.commands.set(command.name, command);
 	}
 }
-console.log(client.commands);
-
 client.on('message', message => {
+	console.log(message.createdAt.toLocaleDateString());
 	const channelIDs = bot_config.Channel_IDS;
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 	if (!channelIDs.includes(message.channel.id)) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
-
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.alias && cmd.alias.includes(commandName));
-	if(!command)return;
+	if (!command) return message.reply('Brak takiej komendy!');
+	const member = message.member;
+	let xd = 0;
+	member._roles.map(role => {
+		rangiT.forEach(element => {
+			if (element[role] != undefined) {
+				xd = (xd <= element[role]) ? (element[role]) : (xd);
+			}
+		});
+	},
+	);
+
+	if ((command.lvl < 0 || command.lvl > xd) && message.author.id != message.guild.ownerID) return;
 	if (command.args && !args.length) {
-		let reply = (`You didn't provide any arguments, ${message.author}!`);
+		let reply = (`Nie podałeś odpowiedniej ilości argumentów, ${message.author}!`);
 		if (command.usage) {
-			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+			reply += `\nPoprawne użycie: \`${prefix}${command.name} ${command.usage}\``;
 		}
 		message.channel.send(reply);
+		return;
 	}
 	try {
+		if (command == 'help') args.push(xd);
 		command.execute(message, args);
 	}
 	catch (error) {
 		console.error(error);
-		message.reply('there was an error trying to execute that commandName!');
+		message.reply(`Wystąpił błąd przy użyciu ${commandName}!`);
 	}
 });

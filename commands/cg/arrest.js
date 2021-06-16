@@ -5,9 +5,10 @@ const oddzialy = config.oddzialy;
 module.exports = {
 	name: 'arrest',
 	alias: ['a', 'areszt'],
-	description: 'Ping!',
+	description: 'dodanie wpisu do spisu aresztów',
 	args: true,
 	usage: 'pełen komunikat z czatu, np.`[KOMUNIKATOR] CG TRP 1234 BOT: Aresztowano CG TRP 4321 KTOS | art. 1 § 2 | 5h | 23:05`, może być bez [KOMUNIKATOR]',
+	lvl: 0,
 	execute(message, args) {
 		args = args.toString().replace(/,/g, ' ').split('|');
 		let string = '';
@@ -44,6 +45,7 @@ module.exports = {
 		czas = czas.trim().replace(/\|/g, '');
 		wyjscie = wyjscie.trim();
 		oddzial = aresztowany.trim().split(' ').shift();
+
 		message.delete();
 		const dane = {
 			cg: acg,
@@ -52,6 +54,7 @@ module.exports = {
 			cz: czas,
 			wj: wyjscie,
 			oddzial: oddzial,
+			czas: message.createdAt.toLocaleDateString(),
 		};
 		x(dane);
 		const embed = new Discord.MessageEmbed()

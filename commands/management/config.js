@@ -5,49 +5,53 @@ module.exports = {
 	alias: [],
 	description: 'Wszystko związane z setupem!',
 	args: true,
-	usage: 'list aby zobaczyć możliwe ustawienia',
+	lvl:-1,
+	usage: 'list` lub `!config <sekcja>',
 	execute(message, args) {
 		const object = config;
 		switch (args[0]) {
 		case 'channels':
 			switch (args[1]) {
+			case 'dodaj':
 			case 'add': {
 				object.Channel_IDS.push(args[2]);
 				const data = JSON.stringify(object);
-				fs.writeFile('./config.json', data, function(err) {
+				fs.writeFile('./bot-config.json', data, function(err) {
 					if (err) {
-						console.log('There has been an error saving your configuration data.');
+						console.log('Wystąpił błąd przy zmienianiu ustawień.');
 						console.log(err.message);
 						return;
 					}
-					console.log('Configuration saved successfully.');
+					console.log('Pomyślnie zmieniono ustawienia.');
 				});
 			}
 				break;
+			case 'usuń':
 			case 'remove': {
-				let array = object.Channel_IDS;
+				const array = object.Channel_IDS;
 				if (array.length <= 1) {
 					message.reply('Nie można usunąć ostatniego kanału!!');
 					break;
 				}
-				let index = 0;
 				for (let i = 0; i < array.length; i++) {
-					if (args[2] === array[i]) {
-						index = 0;
+					console.log(array[i]);
+					console.log(i);
+					if (array[i] === args[2]) {
+						array.splice(i, 1);
+						i--;
 						break;
 					}
 				}
-				array = array.splice(index, 1);
 				console.log(array);
 				object.Channel_IDS = array;
 				const data = JSON.stringify(object);
-				fs.writeFile('./config.json', data, function(err) {
+				fs.writeFile('./bot-config.json', data, function(err) {
 					if (err) {
-						console.log('There has been an error saving your configuration data.');
+						console.log('Wystąpił błąd przy zmienianiu ustawień.');
 						console.log(err.message);
 						return;
 					}
-					console.log('Configuration saved successfully.');
+					console.log('Pomyślnie zmieniono ustawienia.');
 				});
 			}
 				break;

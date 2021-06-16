@@ -18,7 +18,7 @@
 const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
-const config = require('bot-config.json');
+const config = require('./bot-config.json');
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
@@ -102,12 +102,14 @@ function InputData(auth, dane) {
 			dane.art,
 			dane.cz,
 			dane.wj,
-			dane.oddzial],
+			dane.oddzial,
+			dane.czas,
+		],
 	];
 	sheets.spreadsheets.values.append({
 		spreadsheetId: config.spreadsheetId,
 		range: config.range,
-		valueInputOption: 'RAW',
+		valueInputOption: 'USER_ENTERED',
 		insertDataOption: 'INSERT_ROWS',
 		resource: { values,
 		},
