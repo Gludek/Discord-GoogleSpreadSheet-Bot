@@ -1,24 +1,21 @@
 const Discord = require('discord.js');
-const config = require('./config.json');
-const bot_config = require('./bot-config.json');
+const bot_config = require('./config.json');
+const config = require('./bot-config.json');
 const fs = require('fs');
 const winston = require('winston');
-
+const prefix = config.prefix;
 const logger = winston.createLogger({
 	transports: [
 		new winston.transports.Console(),
-		new winston.transports.File({ filename: 'log' }),
+		new winston.transports.File({ filename: 'log.log' }),
 	],
 	format: winston.format.printf(log => `[${log.level.toUpperCase()}] - ${log.message}`),
 });
-
 // Setup
 const client = new Discord.Client();
-const prefix = bot_config.prefix;
-// const channelID = '477172511424118804';
 const rangi = [];
 let rangiT = [];
-client.login(config.BOT_TOKEN);
+client.login(bot_config.BOT_TOKEN);
 client.on('ready', () => {
 	logger.log('info', 'The bot is online!');
 	client.guilds.cache.map(guild => {
@@ -39,14 +36,11 @@ client.on('ready', () => {
 });
 client.on('debug', m => logger.log('debug', m));
 client.on('warn', m => logger.log('warn', m));
-client.on('error', m => logger.log('error', m));
-
-process.on('uncaughtException', error => logger.log('error', error));
 
 
 client.commands = new Discord.Collection();
 const commandFolders = fs.readdirSync('./commands');
-
+console.log(commandFolders);
 for (const folder of commandFolders) {
 	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
 	for (const file of commandFiles) {
@@ -55,11 +49,10 @@ for (const folder of commandFolders) {
 	}
 }
 client.on('message', message => {
-	console.log(message.createdAt.toLocaleDateString());
-	const channelIDs = bot_config.Channel_IDS;
+	const channelIDs = config.Channel_IDS;
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 	if (!channelIDs.includes(message.channel.id)) return;
-
+	logger.log('debug', client.commands);
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.alias && cmd.alias.includes(commandName));
@@ -85,7 +78,8 @@ client.on('message', message => {
 		return;
 	}
 	try {
-		if (command == 'help') args.push(xd);
+		console.log('1');
+		if (command.name == 'help') args.push(xd);
 		command.execute(message, args);
 	}
 	catch (error) {

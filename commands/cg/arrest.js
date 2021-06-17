@@ -58,7 +58,7 @@ module.exports = {
 		};
 		x(dane);
 		const embed = new Discord.MessageEmbed()
-			.setTitle('    ---Nowy areszt---')
+			.setTitle('\t---Nowy areszt---')
 			.addFields(
 				{ name: 'Aresztowany:', value: aresztowany },
 				{ name: 'Złamane artykuły:', value: artykuly },

@@ -119,3 +119,15 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+node_modules/.package-lock.json
+node_modules/@babel/highlight/node_modules/color-convert/CHANGELOG.md
+node_modules/@babel/highlight/node_modules/color-convert/conversions.js
+node_modules/@babel/highlight/node_modules/color-convert/index.js
+node_modules/@babel/highlight/node_modules/color-convert/LICENSE
+node_modules/@babel/highlight/node_modules/color-convert/README.md
+node_modules/@babel/highlight/node_modules/color-convert/route.js
+node_modules/@babel/highlight/node_modules/color-name/.npmignore
+node_modules/@babel/highlight/node_modules/color-name/index.js
+node_modules/@babel/highlight/node_modules/color-name/LICENSE
+node_modules/@babel/highlight/node_modules/color-name/README.md
+node_modules/@babel/highlight/node_modules/color-name/test.js
