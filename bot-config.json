@@ -1,6 +1,6 @@
 {
     "Channel_IDS": [
-        "854397349177851984"
+        "discord_channel_ID"
     ],
     "prefix": "!",
     "oddzialy": [
@@ -12,6 +12,6 @@
         "ws",
         "flota"
     ],
-    "spreadsheetId": "1BCACAT_QhbpqmGimiQqjFhevhj3hTgxGL-Tdnt8cdPM",
+    "spreadsheetId": "spreadsheetID",
     "range": "Areszty!A2:E"
 }
