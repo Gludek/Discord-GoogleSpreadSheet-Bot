@@ -1,0 +1,17 @@
+{
+    "Channel_IDS": [
+        "discord_channel_ID"
+    ],
+    "prefix": "!",
+    "oddzialy": [
+        "cg",
+        "1st",
+        "327th",
+        "41st",
+        "212th",
+        "ws",
+        "flota"
+    ],
+    "spreadsheetId": "spreadsheetID",
+    "range": "Areszty!A2:E"
+}
